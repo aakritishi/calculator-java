@@ -116,15 +116,62 @@ class CalculatorUIComp{
                 resultbox.setText("");
             }
             else if( command.equals("=")){
-                // if(!num1.isEmpty() && !num2.isEmpty()){
-                //     String result = performOperation();
-                //     resultbox.setText(result);
-                //     num1 = result;
-                //     num2 = "";
-                //     operator = "";
-                // }
+                if(!num1.isEmpty() && !num2.isEmpty()){
+                    String result = performOperation();
+                    resultbox.setText(result);
+                    num1 = result;
+                    num2 = "";
+                    operator = "";
+                }
             }
         }
+        
+    } 
+   
+    
+    private String performOperation(){
+        if(operator.equals("/")){
+            double n1 = Double.parseDouble(num1);
+            double n2 = Double.parseDouble(num2);
+            double result = Divide(n1, n2);
+            return String.valueOf(result);
+        }
+        else{
+            int n1 = Integer.parseInt(num1);
+            int n2 = Integer.parseInt(num2);
+            int result = 0;
+            if(operator.equals("+")){
+                result = Addition(n1, n2);
+            }
+            else if(operator.equals("-")){
+                result = Subtraction(n1, n2);
+            }
+            else if(operator.equals("*")){
+                result = Multiplication(n1, n2);
+            }
+            return String.valueOf(result);
+        }
+    }
+
+    private double Divide(double num1, double num2){
+        if(num2 != 0){
+            return num1/num2;
+        }
+        else{
+            throw new ArithmeticException("Cannot divide by zero");
+        }
+    }
+
+    private int Addition(int num1,int num2){
+        return num1 + num2;
+    }
+
+    private int Subtraction(int num1, int num2){
+        return num1 - num2;
+    }
+
+    private int Multiplication(int num1, int num2){
+        return num1 * num2;
     }
 }
 
