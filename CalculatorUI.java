@@ -1,7 +1,7 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 class CalculatorUIComp{
         private String num1 = "";
@@ -93,7 +93,37 @@ class CalculatorUIComp{
 
     public class ButtonClickListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            // logic section 
+            String command = e.getActionCommand();
+            if(command.matches ("[0-9]") || command.equals("0")){
+                if(operator.isEmpty()){
+                    num1 += command;
+                }
+                else{
+                    num2 += command;
+                }
+                resultbox.setText(num1+operator+num2);
+            }
+            else if(command.matches("[+\\-*/]")){
+                if(!num1.isEmpty()){
+                    operator = command;
+                }
+                resultbox.setText(num1+operator+num2);
+            }
+            else if(command.equals("AC")){
+                num1 = "";
+                num2 = "";
+                operator ="";
+                resultbox.setText("");
+            }
+            else if( command.equals("=")){
+                // if(!num1.isEmpty() && !num2.isEmpty()){
+                //     String result = performOperation();
+                //     resultbox.setText(result);
+                //     num1 = result;
+                //     num2 = "";
+                //     operator = "";
+                // }
+            }
         }
     }
 }
